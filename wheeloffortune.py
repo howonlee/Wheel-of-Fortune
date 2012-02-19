@@ -16,6 +16,11 @@ def spin_wheel(top_cash):
         print "You must have a max cash amount of more than 0 dollars!"
         return
 
+def shuffle_word(word):
+    string_list = list(word)
+    random.shuffle(string_list)
+    return "".join(string_list)
+
 def pick_word(player_word, correct_word):
     if (player_word.lower() == correct_word.lower()):
         print "You got it right! " + player_word + " is the right word!"
@@ -23,6 +28,10 @@ def pick_word(player_word, correct_word):
     else:
         print "Sorry, " + player_word + " is not the right word"
         return False#eg: did they get it right
+
+def hide_word(word):
+    word_length = len(word)
+    
 
 def end_game(player_cash):
     print "You have won $" + str(player_cash)
@@ -38,9 +47,9 @@ def play():
         print "You have $" + str(player_cash)
         print "You're playing for $" + str(poss_cash)
         chosen_word = words[random.randint(0, len(words) - 1)]
-        print chosen_word
-        player_input = raw_input('Enter your word: ')
-        if (player_input == "quit"):
+        print shuffle_word(chosen_word)
+        player_input = raw_input('Enter your word: [RETURN to quit]')
+        if (player_input == ""):
             end_game(player_cash)
             break
         has_won = pick_word(player_input, chosen_word)
