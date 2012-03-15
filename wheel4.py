@@ -10,16 +10,10 @@ def init_words():
     return words
 
 def spin_wheel(top_cash):
-    if (top_cash > 0):
-        return random.randint(1, top_cash)
-    else:
-        print "You must have a max cash amount of more than 0 dollars!"
-        return
+    return
 
 def shuffle_word(word):
-    string_list = list(word)
-    random.shuffle(string_list)
-    return "".join(string_list)
+    return
 
 def pick_word(player_word, correct_word):
     if (player_word.lower() == correct_word.lower()):
@@ -27,7 +21,7 @@ def pick_word(player_word, correct_word):
         return True
     else:
         print "Sorry, " + player_word + " is not the right word"
-        return False#eg: did they get it right
+        return False
 
 
 def end_game(player_cash):
@@ -35,27 +29,23 @@ def end_game(player_cash):
     print "Thank you for playing!"
 
 def play():
-    max_cash = 200
     words = init_words()
     strikes = 0;
     player_cash = 0;
-    max_strikes = 4;
-    while (strikes < max_strikes):
-        poss_cash = spin_wheel(max_cash)
+    while (strikes < 4):
         print "You have $" + str(player_cash)
-        print "You're playing for $" + str(poss_cash)
+        print "You're playing for $50"
         chosen_word = words[random.randint(0, len(words) - 1)]
-        print shuffle_word(chosen_word)
+        print chosen_word
         player_input = raw_input('Enter your word: [RETURN to quit] ')
         if (player_input == ""):
             end_game(player_cash)
             break
         has_won = pick_word(player_input, chosen_word)
         if has_won:
-            player_cash += poss_cash
+            player_cash += 50
         else:
             strikes += 1
-            print "You got an answer wrong! You have " + str(strikes) + " strikes against you. The maximum is " + str(max_strikes) + "." 
     else :
         end_game(player_cash)
 
